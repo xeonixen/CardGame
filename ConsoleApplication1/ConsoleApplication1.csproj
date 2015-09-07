@@ -76,6 +76,12 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\MarcusLonneborg.Cards.csproj">
+      <Project>{4ef6c9f3-e5b2-4594-bfa2-6f1b71db9a45}</Project>
+      <Name>MarcusLonneborg.Cards</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

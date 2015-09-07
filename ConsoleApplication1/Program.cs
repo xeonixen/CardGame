@@ -1,71 +1,28 @@
 ﻿using System;
-
-public enum Suit {Hearts, Spades, Diamons, Clubs }
-public enum Value { Two=2,Three, Four, Five, Six, Seven, Eight, Nine, Ten, Knight, Queen, King, Ace}
-public class Deck 
-{
-    private Card[] cards;
-    public void Shuffle()
-    {
-        Random rnd = new Random(); // not good randomization
-        for (int i=0;i<cards.Length; i++)
-        {
-            Card tmp = cards[i];
-            int r = rnd.Next(cards.Length);
-            cards[i] = cards[r];
-            cards[r] = tmp;
-        }
-
-    }
-    public void PrintDeck()
-    {
-        foreach (Card c in cards)
-        {
-            Console.WriteLine(c.getCardAsString());
-        }
-    }
-    public Deck()
-    {
-        int cnt = 0;
-        cards = new Card[52];
-        for(int i = 2; i < 15; i++)
-        {
-            for(int j = 0; j < 4; j++)
-            {
-                cards[cnt] = new Card((Suit)j, (Value)i);
-                cnt++;
-            }
-        }
-        
-    }
-}
-
-public class Card
-{
-    private Suit suit;
-    private Value value;
-    public  Card()
-    {
-
-    }
-    public Card(Suit _suit, Value _value)
-    {
-        suit = _suit;
-        value = _value;
-    }
-    public string getCardAsString()
-    {
-        return value  + " of " + suit;
-    }
-}
+using MarcusLonneborg.Cards;
 
     class Program
     {
         static void Main(string[] args)
         {
         Deck deck = new Deck();
+        Player[] players = new Player[2];
+        players[0] = new Player("Player 1");
+        players[1] = new Player("Player 2");
         deck.Shuffle();
-        deck.PrintDeck();
+        //deck.PrintDeck();
+        for (int i = 0; i < 5;i++)
+        {
+            players[0].addCardToHand(deck.dealCard());
+            players[1].addCardToHand(deck.dealCard());
+
+        }
+        players[0].printPlayerInfo();
+        players[0].printPlayerHand();
+        Console.WriteLine();
+        players[1].printPlayerInfo();
+        players[1].printPlayerHand();
+        
 
         Console.ReadKey();
         }
