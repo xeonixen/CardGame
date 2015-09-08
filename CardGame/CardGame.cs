@@ -18,13 +18,24 @@ using MarcusLonneborg.Cards;
 
             deck.Shuffle(); // Shuffle the deck
 
-            for (int i = 0; i < 5;i++) // Deal 5 cards to each player
-            {
-                players[0].addCardToHand(deck.dealCard());
-                players[1].addCardToHand(deck.dealCard());
+        //for (int i = 0; i < 5;i++) // Deal 5 cards to each player
+        //{
+        //    players[0].addCardToHand(deck.dealCard());
+        //    players[1].addCardToHand(deck.dealCard());
 
-            }
-            players[0].sortHand();
+        //}
+        players[0].addCardToHand(new Card(Suit.Clubs, Value.Queen));
+        players[0].addCardToHand(new Card(Suit.Clubs, Value.Queen));
+        players[0].addCardToHand(new Card(Suit.Clubs, Value.Queen));
+        players[0].addCardToHand(new Card(Suit.Clubs, Value.Queen));
+        players[0].addCardToHand(new Card(Suit.Clubs, Value.Ace));
+        players[1].addCardToHand(new Card(Suit.Clubs, Value.Queen));
+        players[1].addCardToHand(new Card(Suit.Clubs, Value.Queen));
+        players[1].addCardToHand(new Card(Suit.Clubs, Value.King));
+        players[1].addCardToHand(new Card(Suit.Clubs, Value.Knight));
+        players[1].addCardToHand(new Card(Suit.Clubs, Value.King));
+
+        players[0].sortHand();
             players[1].sortHand();
 
 
@@ -36,10 +47,13 @@ using MarcusLonneborg.Cards;
             
             players[1].printPlayerInfo();
             players[1].printPlayerHand();
-        
-        
 
-            Console.ReadKey(); // Wait for keypress
+        Console.WriteLine();
+            Console.WriteLine(players[0].getPokerHand().pokerHand + " in " + players[0].getPokerHand().rank1 + " and " + players[0].getPokerHand().rank2);
+        Console.WriteLine(players[1].getPokerHand().pokerHand + " in " + players[1].getPokerHand().rank1 + " and " + players[1].getPokerHand().rank2);
+
+
+        Console.ReadKey(); // Wait for keypress
         }
     }
 

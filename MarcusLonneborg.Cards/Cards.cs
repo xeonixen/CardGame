@@ -9,8 +9,12 @@ namespace MarcusLonneborg.Cards
 
     public enum Suit { Hearts, Spades, Diamons, Clubs }
     public enum Value { Two = 2, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Knight, Queen, King, Ace }
-
-
+    public enum PokerHand {None, OnePair,TwoPair, ThreeOfaKind,Straight,Flush,FullHouse, FourOfaKind, StraightFlush,RoyalFlush }
+    public class PokerHandValue
+    {
+        public Value rank1, rank2;
+        public PokerHand pokerHand;
+    }
     public class Deck
     {
         private Card[] cards;
@@ -132,6 +136,69 @@ namespace MarcusLonneborg.Cards
              });
 
         }
+        public PokerHandValue getPokerHand() 
+        {
+            // record how many of each rank we have
+            int[] rank = new int[15];
+            PokerHandValue _pokerHandValue = new PokerHandValue();
+            _pokerHandValue.pokerHand = PokerHand.None;
+            _pokerHandValue.rank1 = Value.Two;
+            _pokerHandValue.rank2 = Value.Two;
+
+            for(int i=0;i<hand.Length;i++)
+            {
+                rank[hand[i].value]++;
+            }
+            int sameCards = 1, sameCards2 = 1;
+            //int firstValue = 0, secondValue = 0;
+            for(int i = 2; i < 15; i++)
+            {
+                if(rank[i]> sameCards)
+                {
+                    if(sameCards!=1)
+                    {
+                        sameCards2 = sameCards;
+                        _pokerHandValue.rank2 = _pokerHandValue.rank1;
+                    }
+                    sameCards = rank[i];
+                    _pokerHandValue.rank1 = (Value)i;
+                }
+                else if(rank[i]>sameCards2)
+                {
+                    sameCards2 = rank[i];
+                    _pokerHandValue.rank2 = (Value)i;
+                }
+            }
+            
+            if (sameCards2 == 1)
+            {
+                if (sameCards == 2)
+                    _pokerHandValue.pokerHand = PokerHand.OnePair;
+                else if (sameCards == 3)
+                    _pokerHandValue.pokerHand = PokerHand.ThreeOfaKind;
+                else if (sameCards == 4)
+                    _pokerHandValue.pokerHand = PokerHand.FourOfaKind;
+
+            }
+            else if (sameCards2 == 2)
+            {
+                if (sameCards == 2)
+                    _pokerHandValue.pokerHand = PokerHand.TwoPair;
+                else if (sameCards == 3)
+                    _pokerHandValue.pokerHand = PokerHand.FullHouse;
+
+
+
+            }
+            else if (sameCards2 == 3)
+            {
+                if (sameCards == 2)
+                    _pokerHandValue.pokerHand = PokerHand.FullHouse;
+            }
+
+            return _pokerHandValue;
+        }
+
         public void printPlayerInfo()
         {
             Console.WriteLine("Name: " + name + "\n" +
