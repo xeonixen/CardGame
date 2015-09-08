@@ -196,9 +196,42 @@ namespace MarcusLonneborg.Cards
                     _pokerHandValue.pokerHand = PokerHand.FullHouse;
             }
 
+            if(sameCards==1)
+            {
+                bool straight = true;
+                bool flush = true;
+                if(hand[0].value<=10)
+                {
+                    for(int i=0;i<hand.Length-1;i++)
+                    {
+                        if (hand[i].value != hand[i + 1].value - 1)
+                            straight = false;
+                        if (hand[i].suit != hand[i + 1].suit)
+                            flush = false;
+                    }
+                }
+                if(straight && flush)
+                {
+                    if (hand[0].value == 10 && hand[0].suit == (int)Suit.Spades)
+                        _pokerHandValue.pokerHand = PokerHand.RoyalFlush;
+                    else
+                        _pokerHandValue.pokerHand = PokerHand.StraightFlush;
+                }
+                if (straight && !flush)
+                {
+                    _pokerHandValue.pokerHand = PokerHand.Straight;
+                }
+                if (!straight && flush)
+                {
+                    _pokerHandValue.pokerHand = PokerHand.Flush;
+                }
+
+            }
+
             return _pokerHandValue;
         }
 
+        
         public void printPlayerInfo()
         {
             Console.WriteLine("Name: " + name + "\n" +

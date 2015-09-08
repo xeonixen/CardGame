@@ -24,15 +24,15 @@ using MarcusLonneborg.Cards;
         //    players[1].addCardToHand(deck.dealCard());
 
         //}
-        players[0].addCardToHand(new Card(Suit.Clubs, Value.Queen));
-        players[0].addCardToHand(new Card(Suit.Clubs, Value.Queen));
-        players[0].addCardToHand(new Card(Suit.Clubs, Value.Queen));
-        players[0].addCardToHand(new Card(Suit.Clubs, Value.Queen));
-        players[0].addCardToHand(new Card(Suit.Clubs, Value.Ace));
+        players[0].addCardToHand(new Card(Suit.Spades, Value.Ten));
+        players[0].addCardToHand(new Card(Suit.Spades, Value.Knight));
+        players[0].addCardToHand(new Card(Suit.Spades, Value.Queen));
+        players[0].addCardToHand(new Card(Suit.Spades, Value.King));
+        players[0].addCardToHand(new Card(Suit.Spades, Value.Ace));
         players[1].addCardToHand(new Card(Suit.Clubs, Value.Queen));
         players[1].addCardToHand(new Card(Suit.Clubs, Value.Queen));
         players[1].addCardToHand(new Card(Suit.Clubs, Value.King));
-        players[1].addCardToHand(new Card(Suit.Clubs, Value.Knight));
+        players[1].addCardToHand(new Card(Suit.Clubs, Value.King));
         players[1].addCardToHand(new Card(Suit.Clubs, Value.King));
 
         players[0].sortHand();
