@@ -59,24 +59,39 @@ namespace MarcusLonneborg.Cards
 
     public class Card
     {
-        private Suit suit;
-        private Value value;
+        private Suit _suit;
+        private Value _value;
         public Card()
         {
             throw new Exception("Must initialize with values, not using default constructor.");
            // suit = Suit.Hearts;
            // value = Value.Ace;
         }
-        public Card(Suit _suit, Value _value)
+        public Card(Suit _tsuit, Value _tvalue)
         {
-            suit = _suit;
-            value = _value;
+            _suit = _tsuit;
+            _value = _tvalue;
         }
         
         public string getCardAsString()
         {
-            return value + " of " + suit;
+            return _value + " of " + _suit;
         }
+        public int suit
+        {
+            get
+            {
+                return (int)_suit;
+            }
+        }
+        public int value
+        {
+            get
+            {
+                return (int)_value;
+            }
+        }
+
     }
 
     public class Player
@@ -104,6 +119,18 @@ namespace MarcusLonneborg.Cards
         public void addCardToHand(Card _card)
         {
             hand[numberOfCards++] = _card;
+        }
+        public void sortHand()
+        {
+            Array.Sort(hand, delegate (Card card1, Card card2) // Sort by value
+            {
+                return card1.value.CompareTo(card2.value);
+            });
+            Array.Sort(hand, delegate (Card card1, Card card2) // sort by suit
+             {
+                 return card1.suit.CompareTo(card2.suit);
+             });
+
         }
         public void printPlayerInfo()
         {
