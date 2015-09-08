@@ -22,6 +22,7 @@ using MarcusLonneborg.Cards;
         Console.WriteLine();
         players[1].printPlayerInfo();
         players[1].printPlayerHand();
+        Console.WriteLine("Hej!");
         
 
         Console.ReadKey();
