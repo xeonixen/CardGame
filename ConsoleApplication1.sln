@@ -1,11 +1,10 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{B422F486-8E2C-4FAA-89FA-C5AACD1A3794}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardGame", "CardGame\CardGame.csproj", "{B422F486-8E2C-4FAA-89FA-C5AACD1A3794}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcusLonneborg.Cards", "ClassLibrary1\MarcusLonneborg.Cards.csproj", "{4EF6C9F3-E5B2-4594-BFA2-6F1B71DB9A45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcusLonneborg.Cards", "MarcusLonneborg.Cards\MarcusLonneborg.Cards.csproj", "{4EF6C9F3-E5B2-4594-BFA2-6F1B71DB9A45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

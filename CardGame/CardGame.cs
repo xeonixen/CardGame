@@ -1,7 +1,7 @@
 ﻿using System;
 using MarcusLonneborg.Cards;
 
-    class Program
+    class CardGame
     {
         static void Main(string[] args)
         {

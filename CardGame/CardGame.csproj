@@ -7,8 +7,8 @@
     <ProjectGuid>{B422F486-8E2C-4FAA-89FA-C5AACD1A3794}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConsoleApplication1</RootNamespace>
-    <AssemblyName>ConsoleApplication1</AssemblyName>
+    <RootNamespace>CardGame</RootNamespace>
+    <AssemblyName>CardGame</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -58,7 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="CardGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,7 +77,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\MarcusLonneborg.Cards.csproj">
+    <ProjectReference Include="..\MarcusLonneborg.Cards\MarcusLonneborg.Cards.csproj">
       <Project>{4ef6c9f3-e5b2-4594-bfa2-6f1b71db9a45}</Project>
       <Name>MarcusLonneborg.Cards</Name>
     </ProjectReference>
