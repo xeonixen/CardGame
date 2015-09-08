@@ -9,12 +9,9 @@ namespace MarcusLonneborg.Cards
 
     public enum Suit { Hearts, Spades, Diamons, Clubs }
     public enum Value { Two = 2, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Knight, Queen, King, Ace }
-    public enum PokerHand {None, OnePair,TwoPair, ThreeOfaKind,Straight,Flush,FullHouse, FourOfaKind, StraightFlush,RoyalFlush }
-    public class PokerHandValue
-    {
-        public Value rank1, rank2;
-        public PokerHand pokerHand;
-    }
+    public enum PokerHand { None, OnePair, TwoPair, ThreeOfaKind, Straight, Flush, FullHouse, FourOfaKind, StraightFlush, RoyalFlush }
+
+
     public class Deck
     {
         private Card[] cards;
@@ -100,43 +97,104 @@ namespace MarcusLonneborg.Cards
 
     public class Player
     {
-        private string name;
+        public string Name
+        {
+            get;
+        }
         private int id;
         private static int numberOfPlayers = 0;
         private int numberOfCards = 0;
-        private Card[] hand;
+        //private Card[] Hand;
+
+        // Get Set
+        public Card[] Hand
+        {
+            get;
+        }
+
+        // Constructors
 
         public Player()
         {
-            name = "Default";
+            Name = "Default";
             id = numberOfPlayers++;
-            hand = new Card[5];
+            Hand = new Card[5];
         }
 
         public Player(string _name)
         {
-            name = _name;
+            Name = _name;
             id = numberOfPlayers++;
-            hand = new Card[5];
+            Hand = new Card[5];
         }
 
+
+
+
+        // Methods
         public void addCardToHand(Card _card)
         {
-            hand[numberOfCards++] = _card;
+            Hand[numberOfCards++] = _card;
         }
         public void sortHand()
         {
-            Array.Sort(hand, delegate (Card card1, Card card2) // Sort by value
+            Array.Sort(Hand, delegate (Card card1, Card card2) // Sort by value
             {
                 return card1.value.CompareTo(card2.value);
             });
-            Array.Sort(hand, delegate (Card card1, Card card2) // sort by suit
+            Array.Sort(Hand, delegate (Card card1, Card card2) // sort by suit
              {
                  return card1.suit.CompareTo(card2.suit);
              });
 
         }
-        public PokerHandValue getPokerHand() 
+        
+
+        
+        public void printPlayerInfo()
+        {
+            Console.WriteLine("Name: " + Name + "\n" +
+                              "ID: " + id);
+        }
+        public void printPlayerHand()
+        {
+            foreach(Card c in Hand)
+            {
+                Console.WriteLine(c.getCardAsString());
+            }
+        }
+
+    }
+
+
+    public class Poker
+    {
+        public class PokerHandValue
+        {
+            public Value rank1, rank2;
+            public PokerHand pokerHand;
+        }
+
+
+        public static int ComparePokerHand(List<PokerHandValue> _handList)
+        {
+            PokerHand highhand=PokerHand.None;
+            int highindex = 0;
+            for(int i=0;i<_handList.Count;i++)
+            {
+                if (_handList[i].pokerHand>=highhand)
+                {
+                    highhand = _handList[i].pokerHand;
+                    highindex = i;
+                }
+
+            }
+            return highindex;
+
+        }
+
+
+        public static PokerHandValue getPokerHand(Card[] hand)
         {
             // record how many of each rank we have
             int[] rank = new int[15];
@@ -145,17 +203,17 @@ namespace MarcusLonneborg.Cards
             _pokerHandValue.rank1 = Value.Two;
             _pokerHandValue.rank2 = Value.Two;
 
-            for(int i=0;i<hand.Length;i++)
+            for (int i = 0; i < hand.Length; i++)
             {
                 rank[hand[i].value]++;
             }
             int sameCards = 1, sameCards2 = 1;
             //int firstValue = 0, secondValue = 0;
-            for(int i = 2; i < 15; i++)
+            for (int i = 2; i < 15; i++)
             {
-                if(rank[i]> sameCards)
+                if (rank[i] > sameCards)
                 {
-                    if(sameCards!=1)
+                    if (sameCards != 1)
                     {
                         sameCards2 = sameCards;
                         _pokerHandValue.rank2 = _pokerHandValue.rank1;
@@ -163,13 +221,13 @@ namespace MarcusLonneborg.Cards
                     sameCards = rank[i];
                     _pokerHandValue.rank1 = (Value)i;
                 }
-                else if(rank[i]>sameCards2)
+                else if (rank[i] > sameCards2)
                 {
                     sameCards2 = rank[i];
                     _pokerHandValue.rank2 = (Value)i;
                 }
             }
-            
+
             if (sameCards2 == 1)
             {
                 if (sameCards == 2)
@@ -196,13 +254,13 @@ namespace MarcusLonneborg.Cards
                     _pokerHandValue.pokerHand = PokerHand.FullHouse;
             }
 
-            if(sameCards==1)
+            if (sameCards == 1)
             {
                 bool straight = true;
                 bool flush = true;
-                if(hand[0].value<=10)
+                if (hand[0].value <= 10)
                 {
-                    for(int i=0;i<hand.Length-1;i++)
+                    for (int i = 0; i < hand.Length - 1; i++)
                     {
                         if (hand[i].value != hand[i + 1].value - 1)
                             straight = false;
@@ -210,41 +268,39 @@ namespace MarcusLonneborg.Cards
                             flush = false;
                     }
                 }
-                if(straight && flush)
+                if (straight && flush)
                 {
                     if (hand[0].value == 10 && hand[0].suit == (int)Suit.Spades)
                         _pokerHandValue.pokerHand = PokerHand.RoyalFlush;
                     else
+                    {
                         _pokerHandValue.pokerHand = PokerHand.StraightFlush;
+                        _pokerHandValue.rank1 = (Value)hand[0].value;
+                        _pokerHandValue.rank2 = (Value)hand[4].value;
+
+                    }
                 }
                 if (straight && !flush)
                 {
                     _pokerHandValue.pokerHand = PokerHand.Straight;
+                    _pokerHandValue.rank1 = (Value)hand[0].value;
+                    _pokerHandValue.rank2 = (Value)hand[4].value;
                 }
                 if (!straight && flush)
                 {
                     _pokerHandValue.pokerHand = PokerHand.Flush;
+                    _pokerHandValue.rank1 = (Value)hand[0].value;
+                    _pokerHandValue.rank2 = (Value)hand[4].value;
                 }
 
             }
 
             return _pokerHandValue;
         }
-
-        
-        public void printPlayerInfo()
-        {
-            Console.WriteLine("Name: " + name + "\n" +
-                              "ID: " + id);
-        }
-        public void printPlayerHand()
-        {
-            foreach(Card c in hand)
-            {
-                Console.WriteLine(c.getCardAsString());
-            }
-        }
-
     }
 
+
+
+
 }
+
