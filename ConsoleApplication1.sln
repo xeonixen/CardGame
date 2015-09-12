@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardGame", "CardGame\CardGa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcusLonneborg.Cards", "MarcusLonneborg.Cards\MarcusLonneborg.Cards.csproj", "{4EF6C9F3-E5B2-4594-BFA2-6F1B71DB9A45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{95BA29CF-8154-4282-B198-DA72CDE72DA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{4EF6C9F3-E5B2-4594-BFA2-6F1B71DB9A45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EF6C9F3-E5B2-4594-BFA2-6F1B71DB9A45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EF6C9F3-E5B2-4594-BFA2-6F1B71DB9A45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95BA29CF-8154-4282-B198-DA72CDE72DA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95BA29CF-8154-4282-B198-DA72CDE72DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95BA29CF-8154-4282-B198-DA72CDE72DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95BA29CF-8154-4282-B198-DA72CDE72DA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace MarcusLonneborg.Cards
 {
 
-    public enum Suit { Hearts, Spades, Diamons, Clubs }
+    public enum Suit { Clubs, Diamonds, Hearts, Spades }
     public enum Value { Two = 2, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Knight, Queen, King, Ace }
     public enum PokerHand { None, OnePair, TwoPair, ThreeOfaKind, Straight, Flush, FullHouse, FourOfaKind, StraightFlush, RoyalFlush }
 
@@ -62,6 +63,7 @@ namespace MarcusLonneborg.Cards
     {
         private Suit _suit;
         private Value _value;
+       
         public Card()
         {
             throw new Exception("Must initialize with values, not using default constructor.");
@@ -296,6 +298,10 @@ namespace MarcusLonneborg.Cards
             }
 
             return _pokerHandValue;
+        }
+        public static string ph(Poker.PokerHandValue epa)
+        {
+            return Convert.ToString(epa);
         }
     }
 
