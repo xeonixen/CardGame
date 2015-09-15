@@ -15,49 +15,72 @@ namespace WindowsFormsApplication1
     {
         public Form1()
         {
-            Bitmap image = new Bitmap("cards.jpg");
-            Bitmap[] cards = new Bitmap[60];
-            Bitmap test = new Bitmap(1024, 1024);
-            Player player = new Player("Marcus");
-            Deck deck = new Deck();
-            deck.Shuffle();
-             for(int i = 0;i<5;i++)
-             {
-                  player.addCardToHand(deck.dealCard());
+            Bitmap image = new Bitmap("cards.jpg");     // Cards Bitmap
+            Bitmap[] cards = new Bitmap[60];            // Array of Bitmap to hold Card Sprites
+            Bitmap test = new Bitmap(1024, 1024);       // Background Bitmap
+            Player[] player = new Player[2];            // Player array
+            player[0] = new Player("AI");               // Instanciate player 1
+            player[1] = new Player("Marcus");           // Instanciate player 2
+            Deck deck = new Deck();                     // Create instance of Deck with 52 cards
+            deck.Shuffle();                             // Shuffle deck
 
-              }
-
-            player.sortHand();
-
-
+            // Populate card sprite array
             int cnt = 0;
-            for(int j = 0; j < 4; j++)
+            for (int j = 0; j < 4; j++)
             {
-                for(int i = 0; i < 13; i++)
+                for (int i = 0; i < 13; i++)
                 {
-                    
-                     cards[cnt++] = new Bitmap(image.Clone(new Rectangle((int)(i*38.5), (int)(j*60), 38, 60), image.PixelFormat));
-                    //pictureBox1.Image = cards[cnt-1];
+
+                    cards[cnt++] = new Bitmap(image.Clone(new Rectangle((int)(i * 38.5), (int)(j * 60), 38, 60), image.PixelFormat));
                 }
                 cnt++;
             }
+            // Rearrange cards sprites Aces from 1 to 14
             cards[13] = cards[0];
             cards[27] = cards[14];
             cards[41] = cards[28];
             cards[55] = cards[42];
+
+
+
+
+            // Deal Cards to Players
+            for (int j = 0; j < 2; j++)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    player[j].addCardToHand(deck.dealCard());
+                }
+                player[j].sortHand();                   // Sort Hand ( Not Working )
+            }
+            
+
+            
             
             InitializeComponent();
 
-            //test = marcusGraphic.blit(test, cards[1], 100, 100);
-            for(int i = 0; i < 5; i++)
+            // Draw both players hands
+            for (int j = 0; j < 2; j++)
             {
-                pictureBox1.Image = marcusGraphic.blit(test, cards[(player.Hand[i].suit * 14) + player.Hand[ i].value-1 ], 200+(i*50), 350);
+                for (int i = 0; i < 5; i++)
+                {
+                    pictureBox1.Image = marcusGraphic.blit(test, cards[(player[j].Hand[i].suit * 14) + player[j].Hand[i].value - 1], 200 + (i * 50), (j*330)+20);
+                }
             }
-            label1.Text = Enum.GetName(typeof(PokerHand), Poker.getPokerHand(player.Hand).pokerHand); //Poker.ph(handValue);
-            
-            //pictureBox1.Image = blitSurface;
+            List<Poker.PokerHandValue> hands = new List<Poker.PokerHandValue>();
+            hands.Add(Poker.getPokerHand(player[0].Hand));
+            hands.Add(Poker.getPokerHand(player[1].Hand));
 
+            label1.Text = Enum.GetName(typeof(PokerHand), hands[0].pokerHand); 
+            label2.Text = Enum.GetName(typeof(PokerHand), hands[1].pokerHand);
+            int result = Poker.ComparePokerHand(hands);
+            if (result == 0) label1.Text += " Winner";
+            else label2.Text += " Winner";
         }
+
+        /// <summary>
+        /// Method to draw small bitmap(sprite) on large bitmap(background)
+        /// </summary>
         public class marcusGraphic
         {
             public static Bitmap blit(Bitmap largeBitmap, Bitmap smallBitmap, int x, int y)
