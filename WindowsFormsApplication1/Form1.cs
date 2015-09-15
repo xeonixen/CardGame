@@ -21,11 +21,11 @@ namespace WindowsFormsApplication1
             Player player = new Player("Marcus");
             Deck deck = new Deck();
             deck.Shuffle();
-           for(int i = 0;i<5;i++)
-           {
-                player.addCardToHand(deck.dealCard());
-                
-            }
+             for(int i = 0;i<5;i++)
+             {
+                  player.addCardToHand(deck.dealCard());
+
+              }
 
             player.sortHand();
 
