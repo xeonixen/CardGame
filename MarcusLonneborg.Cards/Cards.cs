@@ -178,20 +178,14 @@ namespace MarcusLonneborg.Cards
         }
 
 
-        public static int ComparePokerHand(List<PokerHandValue> _handList)
+        public static int ComparePokerHand(Card[]  hand0, Card[] hand1)
         {
-            PokerHand highhand=PokerHand.None;
-            int highindex = 0;
-            for(int i=0;i<_handList.Count;i++)
-            {
-                if (_handList[i].pokerHand>=highhand)
-                {
-                    highhand = _handList[i].pokerHand;
-                    highindex = i;
-                }
-
-            }
-            return highindex;
+            if (Poker.getPokerHand(hand0).pokerHand > Poker.getPokerHand(hand1).pokerHand)
+                return 0;
+            else if (Poker.getPokerHand(hand0).pokerHand == Poker.getPokerHand(hand1).pokerHand && Poker.getPokerHand(hand0).rank1 > Poker.getPokerHand(hand1).rank1)
+                return 0;
+            else 
+                return 1;
 
         }
 

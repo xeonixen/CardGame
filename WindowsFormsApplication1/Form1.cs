@@ -67,13 +67,10 @@ namespace WindowsFormsApplication1
                     pictureBox1.Image = marcusGraphic.blit(test, cards[(player[j].Hand[i].suit * 14) + player[j].Hand[i].value - 1], 200 + (i * 50), (j*330)+20);
                 }
             }
-            List<Poker.PokerHandValue> hands = new List<Poker.PokerHandValue>();
-            hands.Add(Poker.getPokerHand(player[0].Hand));
-            hands.Add(Poker.getPokerHand(player[1].Hand));
 
-            label1.Text = Enum.GetName(typeof(PokerHand), hands[0].pokerHand); 
-            label2.Text = Enum.GetName(typeof(PokerHand), hands[1].pokerHand);
-            int result = Poker.ComparePokerHand(hands);
+            label1.Text = Enum.GetName(typeof(PokerHand), Poker.getPokerHand(player[0].Hand).pokerHand); 
+            label2.Text = Enum.GetName(typeof(PokerHand), Poker.getPokerHand(player[1].Hand).pokerHand);
+            int result = Poker.ComparePokerHand(player[0].Hand,player[1].Hand);
             if (result == 0) label1.Text += " Winner";
             else label2.Text += " Winner";
         }
