@@ -59,7 +59,7 @@ namespace MarcusLonneborg.Cards
         }
     }
 
-    public class Card
+    public class Card : IComparable<Card>
     {
         private Suit _suit;
         private Value _value;
@@ -75,7 +75,19 @@ namespace MarcusLonneborg.Cards
             _suit = _tsuit;
             _value = _tvalue;
         }
-        
+        public int CompareTo(Card c)
+        {
+            if(c==null)
+                return 1;
+            int cvalue1 = (suit * 14) + value;
+            int cvalue2 = (c.suit * 14) + c.value;
+            if (cvalue1 < cvalue2) return -1;
+            else if (cvalue1 > cvalue2) return 1;
+            else return 0;
+
+
+        }
+
         public string getCardAsString()
         {
             return _value + " of " + _suit;
@@ -140,15 +152,7 @@ namespace MarcusLonneborg.Cards
         }
         public void sortHand()
         {
-            Array.Sort(Hand, delegate (Card card1, Card card2) // Sort by value
-            {
-                return card1.value.CompareTo(card2.value);
-            });
-            Array.Sort(Hand, delegate (Card card1, Card card2) // sort by suit
-             {
-                 return card1.suit.CompareTo(card2.suit);
-             });
-
+            Array.Sort(Hand);
         }
         
 
